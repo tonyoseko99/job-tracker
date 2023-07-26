@@ -18,4 +18,20 @@ async function createJobApplication(jobApplicationData) {
   }
 }
 
-export { createJobApplication };
+// fetch all job applications
+async function getAllJobApplications() {
+  try {
+    const db = await getDB();
+    const jobApplicationsCollection = db.collection("jobApplications");
+
+    // find all job applications and convert the cursor to an array
+    const jobApplications = await jobApplicationsCollection.find({}).toArray();
+
+    // return the array
+    return jobApplications;
+  } catch (error) {
+    throw new Error("Failed to fetch job applications");
+  }
+}
+
+export { createJobApplication, getAllJobApplications };
