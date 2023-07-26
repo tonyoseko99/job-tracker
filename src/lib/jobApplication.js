@@ -34,4 +34,54 @@ async function getAllJobApplications() {
   }
 }
 
-export { createJobApplication, getAllJobApplications };
+// Implement Update Operation:
+async function updateJobApplication(applicationId, updatedData) {
+  try {
+    const db = await getDB();
+    const jobApplicationsCollection = db.collection("jobApplications");
+
+    // update the job application data
+    const result = await jobApplicationsCollection.updateOne(
+      { _id: applicationId },
+      { $set: updatedData }
+    );
+
+    if (result.modifiedCount === 0) {
+      throw new Error("Job application not found or data not modified");
+    }
+
+    // Successful update
+    return true;
+  } catch (error) {
+    throw new Error("Failed to update job");
+  }
+}
+
+// Delete job application
+async function deleteJobApplication(applicationId) {
+  try {
+    const db = await getDB();
+    const jobApplicationsCollection = db.collection("jobApplications");
+
+    // Delete the job application from the db
+    const result = await jobApplicationsCollection.deleteOne({
+      _id: applicationId,
+    });
+
+    if (result.deletedCount === 0) {
+      throw new Error("Job application not found or already deleted");
+    }
+
+    // successful deletion
+    return true;
+  } catch (error) {
+    throw new Error("Failed to delete job application");
+  }
+}
+
+export {
+  createJobApplication,
+  getAllJobApplications,
+  updateJobApplication,
+  deleteJobApplication,
+};
