@@ -21,7 +21,7 @@ const connectDB = async () => {
 
 const getDB = () => {
   if (!db) {
-    throw new error("Connect to the database before calling this function");
+    throw new Error("Connect to the database before calling this function");
   }
   return db;
 };
