@@ -1,7 +1,9 @@
-import { MongoClient } from "mongodb";
+const { MongoClient } = require("mongodb");
 
-const uri = process.env.MONGODB_URI;
-console.log(uri);
+const uri = process.env.DB_MONGODB_URI;
+console.log(process.env.DB_MONGODB_URI);
+console.log(`Connecting to ${uri}`);
+
 const options = {
   useUnifiedTopology: true,
 };
@@ -10,7 +12,7 @@ let client;
 let db;
 
 const connectDB = async () => {
-  if (client) {
+  if (client && client.isConnected()) {
     return client;
   }
 
@@ -21,9 +23,19 @@ const connectDB = async () => {
 
 const getDB = () => {
   if (!db) {
-    throw new Error("Connect to the database before calling this function");
+    console.log("Connect to the database before calling this function");
   }
   return db;
 };
 
-export { connectDB, getDB };
+const closeDB = () => {
+  if (client) {
+    client.close();
+  }
+};
+
+module.exports = {
+  connectDB,
+  getDB,
+  closeDB,
+};

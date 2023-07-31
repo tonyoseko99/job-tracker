@@ -1,5 +1,5 @@
 # Use the official image as a parent image.
-FROM node:16-alpine
+FROM node:lts-alpine
 
 # Set the working directory.
 WORKDIR /app
