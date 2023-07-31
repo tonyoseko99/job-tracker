@@ -30,21 +30,21 @@ async function createJobApplication(jobApplicationData) {
   }
 }
 
-// // fetch all job applications
-// async function getAllJobApplications() {
-//   try {
-//     const db = await getDB();
-//     const jobApplicationsCollection = db.collection("jobApplications");
+// fetch all job applications
+async function getAllJobApplications() {
+  try {
+    const db = await getDB();
+    const jobApplicationsCollection = db.collection("jobApplications");
 
-//     // find all job applications and convert the cursor to an array
-//     const jobApplications = await jobApplicationsCollection.find({}).toArray();
+    // find all job applications and convert the cursor to an array
+    const jobApplications = await jobApplicationsCollection.find({}).toArray();
 
-//     // return the array
-//     return jobApplications;
-//   } catch (error) {
-//     console.log("Failed to fetch job applications");
-//   }
-// }
+    // return the array
+    return jobApplications;
+  } catch (error) {
+    console.log("Failed to fetch job applications");
+  }
+}
 
 // // Implement Update Operation:
 // async function updateJobApplication(applicationId, updatedData) {
@@ -91,4 +91,4 @@ async function createJobApplication(jobApplicationData) {
 //   }
 // }
 
-module.exports = { createJobApplication };
+module.exports = { createJobApplication, getAllJobApplications };
