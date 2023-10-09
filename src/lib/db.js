@@ -13,18 +13,22 @@ let db;
 
 const connectDB = async () => {
   if (client && client.isConnected()) {
+    console.log("Using existing connection");
     return client;
   }
 
   client = await MongoClient.connect(uri, options);
   db = client.db();
+  console.log("New connection");
   return client;
 };
 
 const getDB = () => {
   if (!db) {
     console.log("Connect to the database before calling this function");
+    return;
   }
+  console.log("Returning db");
   return db;
 };
 

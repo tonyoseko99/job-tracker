@@ -1,9 +1,9 @@
 // jobApplication.js
-const { getDB } = require("../db");
+const { getDB, connectDB } = require("../db");
 
 async function createJobApplication(jobApplicationData) {
   try {
-    const db = await getDB();
+    const db = await connectDB();
     const jobApplicationsCollection = db.collection("jobApplications");
 
     // Insert the job application data into the MongoDB collection

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Inter } from "next/font/google";
 import AddJobForm from "@/components/AddJobForm";
 import Modal from "react-modal";
-import { fetchApplications } from "@/api/routes";
 
 Modal.setAppElement("#__next");
 
@@ -22,14 +21,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchApplications()
-      .then((applications) => {
-        setJobs(applications);
-        console.log(applications);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    
   }, []);
 
   return (
@@ -58,7 +50,7 @@ export default function Home() {
         <Modal
           isOpen={isOpen}
           onRequestClose={closeForm}
-          className="modal"
+          className="modalonye py-10"
           overlayClassName="overlay"
         >
           <AddJobForm />

@@ -1,5 +1,5 @@
-const { connectDB, closeDB } = require("../db");
-const { createJobApplication } = require("./jobApplication");
+const { connectDB, closeDB } = require("./db");
+const { createJobApplication } = require("./api/jobApplication");
 
 async function run(jobApplicationData) {
   try {
