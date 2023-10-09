@@ -1,15 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import AddJobForm from "@/components/AddJobForm";
 import Modal from "react-modal";
+import { fetchApplications } from "@/api/routes";
 
 Modal.setAppElement("#__next");
 
 export default function Home() {
+  const [jobs, setJobs] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+
   const openForm = () => {
     setIsOpen(true);
   };
@@ -17,10 +20,24 @@ export default function Home() {
   const closeForm = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    fetchApplications()
+      .then((applications) => {
+        setJobs(applications);
+        console.log(applications);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
-    <main className="flex flex-col items-center justify-between p-20 h-screen" id="__next">
+    <main className="flex flex-col items-center justify-between p-20 pb-50">
       <div className="container flex items-center justify-between">
-        <h1 className="underline cursor-pointer font-bold text-xl leading-3">My Applications</h1>
+        <h1 className="underline cursor-pointer font-bold text-xl leading-3">
+          My Applications
+        </h1>
         {isOpen ? (
           <button
             className="border rounded p-3 hover:text-black hover:bg-white"
@@ -37,14 +54,16 @@ export default function Home() {
           </button>
         )}
       </div>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={closeForm}
-        className="modal"
-        overlayClassName="overlay"
-      >
-        <AddJobForm />
-      </Modal>
+      <div id="__next">
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeForm}
+          className="modal"
+          overlayClassName="overlay"
+        >
+          <AddJobForm />
+        </Modal>
+      </div>
     </main>
   );
 }

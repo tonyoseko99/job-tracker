@@ -46,49 +46,54 @@ async function getAllJobApplications() {
   }
 }
 
-// // Implement Update Operation:
-// async function updateJobApplication(applicationId, updatedData) {
-//   try {
-//     const db = await getDB();
-//     const jobApplicationsCollection = db.collection("jobApplications");
+// Implement Update Operation:
+async function updateJobApplication(applicationId, updatedData) {
+  try {
+    const db = await getDB();
+    const jobApplicationsCollection = db.collection("jobApplications");
 
-//     // update the job application data
-//     const result = await jobApplicationsCollection.updateOne(
-//       { _id: applicationId },
-//       { $set: updatedData }
-//     );
+    // update the job application data
+    const result = await jobApplicationsCollection.updateOne(
+      { _id: applicationId },
+      { $set: updatedData }
+    );
 
-//     if (result.modifiedCount === 0) {
-//       console.log("Job application not found or data not modified");
-//     }
+    if (result.modifiedCount === 0) {
+      console.log("Job application not found or data not modified");
+    }
 
-//     // Successful update
-//     return true;
-//   } catch (error) {
-//     console.log("Failed to update job");
-//   }
-// }
+    // Successful update
+    return true;
+  } catch (error) {
+    console.log("Failed to update job");
+  }
+}
 
-// // Delete job application
-// async function deleteJobApplication(applicationId) {
-//   try {
-//     const db = await getDB();
-//     const jobApplicationsCollection = db.collection("jobApplications");
+// Delete job application
+async function deleteJobApplication(applicationId) {
+  try {
+    const db = await getDB();
+    const jobApplicationsCollection = db.collection("jobApplications");
 
-//     // Delete the job application from the db
-//     const result = await jobApplicationsCollection.deleteOne({
-//       _id: applicationId,
-//     });
+    // Delete the job application from the db
+    const result = await jobApplicationsCollection.deleteOne({
+      _id: applicationId,
+    });
 
-//     if (result.deletedCount === 0) {
-//       console.log("Job application not found or already deleted");
-//     }
+    if (result.deletedCount === 0) {
+      console.log("Job application not found or already deleted");
+    }
 
-//     // successful deletion
-//     return true;
-//   } catch (error) {
-//     console.log("Failed to delete job application");
-//   }
-// }
+    // successful deletion
+    return true;
+  } catch (error) {
+    console.log("Failed to delete job application");
+  }
+}
 
-module.exports = { createJobApplication, getAllJobApplications };
+module.exports = {
+  createJobApplication,
+  getAllJobApplications,
+  updateJobApplication,
+  deleteJobApplication,
+};

@@ -10,6 +10,8 @@
     "start:db": "node src/db"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.16",
+    "@heroicons/react": "^2.0.18",
     "autoprefixer": "10.4.14",
     "mongodb": "^5.7.0",
     "next": "13.4.12",
